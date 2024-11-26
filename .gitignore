@@ -1,6 +1,7 @@
 *.zone.identifier
 *.csv
 
+path.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
