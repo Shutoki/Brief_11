@@ -1,7 +1,9 @@
 *.zone.identifier
 *.csv
 
-path.py
+testing_api.ipynb
+api.py
+web/path.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
