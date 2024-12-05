@@ -1,11 +1,9 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-<<<<<<< HEAD
 import psycopg2
 import sqlalchemy
 # from utils import load_data
-=======
 import  plotly.express  as  px 
 import plotly.figure_factory as ff
 import json
@@ -17,32 +15,23 @@ from streamlit_folium import folium_static
 
 from utils import load_data
 
->>>>>>> isab2
 
 
 st.set_page_config(page_title="Marché du travail Tech",
     page_icon="🧊",
     layout="wide")
 
-<<<<<<< HEAD
 conn = st.connection("postgresql", type="sql") # calls for secrets.toml file to access postgresql
 
 df = conn.query('SELECT * FROM france_travail;', ttl="10m") #fetch all data from table "france_travail" / ttl=10m for max cache time = 10 minutes
 
 
-=======
->>>>>>> isab2
 st.sidebar.title("Filtres")
 
 
 st.title("Data : Marché du travail Tech")
 
 # appel de la fonction load_data, affichage des données 
-<<<<<<< HEAD
-# data = load_data()
-
-st.dataframe(df)
-=======
 data = load_data()
 
 # Affichage initial des données
@@ -207,4 +196,3 @@ else:
 # # Afficher les treemaps dans Streamlit
 # st.plotly_chart(fig_romecode, use_container_width=True)
 # st.plotly_chart(fig_M1805, use_container_width=True)
->>>>>>> isab2
