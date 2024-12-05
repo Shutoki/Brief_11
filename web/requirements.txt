@@ -2,3 +2,10 @@ streamlit
 streamlit-aggrid
 requests
 sqlalchemy
+psycopg2-binary
+plotly
+plotly.express
+plotly.figure_factory
+folium
+geopandas
+streamlit_folium
