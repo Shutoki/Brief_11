@@ -1,0 +1,6 @@
+flask
+requests
+pandas
+sqlalchemy
+sqlalchemy-utils
+api-offres-emploi
