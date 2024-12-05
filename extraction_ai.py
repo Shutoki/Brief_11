@@ -6,7 +6,7 @@ from openai import AzureOpenAI
 from pprint import pprint
 import json
 from test import new_df
-
+from ai_keys import client
 
 load_dotenv()
 
@@ -19,11 +19,7 @@ print(df.shape)
 
 
 
-client = AzureOpenAI(
-    api_key="DHEM1xz6J2UQGOhfuI1M8mwcb6yuyBCzNwuOYjvn19q9CPl6gZgOJQQJ99AKAC5RqLJXJ3w3AAABACOGYLdQ",  
-    api_version="2024-10-21",
-    azure_endpoint="https://openaishuto.openai.azure.com/openai/deployments/gpt-35-turbo/chat/completions?api-version=2024-08-01-preview"
-    )
+
 
 deployment_name="gpt-35-turbo (version:0301)"
 
