@@ -32,8 +32,8 @@ services:
     hostname: postgres
     image: postgres
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: 'admin'
+      POSTGRES_PASSWORD: 'password'
       PGDATA: /data/postgres
     volumes:
        - postgres:/data/postgres
@@ -47,6 +47,7 @@ services:
   pgadmin:
     container_name: pgadmin_container
     image: dpage/pgadmin4
+    
     environment:
       PGADMIN_DEFAULT_EMAIL: renard.isa67@gmail.com
       PGADMIN_DEFAULT_PASSWORD: password

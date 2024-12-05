@@ -6,6 +6,7 @@ from openai import AzureOpenAI
 from pprint import pprint
 import json
 from test import new_df
+from ai_keys import client
 
 
 load_dotenv()
@@ -18,17 +19,10 @@ df = pd.read_csv("postgres_data/france_travail_clean.csv")
 print(df.shape)
 
 
-
-client = AzureOpenAI(
-    api_key="DHEM1xz6J2UQGOhfuI1M8mwcb6yuyBCzNwuOYjvn19q9CPl6gZgOJQQJ99AKAC5RqLJXJ3w3AAABACOGYLdQ",  
-    api_version="2024-10-21",
-    azure_endpoint="https://openaishuto.openai.azure.com/openai/deployments/gpt-35-turbo/chat/completions?api-version=2024-08-01-preview"
-    )
-
 deployment_name="gpt-35-turbo (version:0301)"
 
 
-all_job_description = df[["id", "description"]].iloc[:3]
+all_job_description = df[["id", "description"]]
 
 
 
@@ -76,8 +70,8 @@ cleaned_skills_df = indexReset_df.rename(columns={"index": "id",
                          "Technologie" : "formations"},)
 
 
-new_df["competences"].iloc[:3] = cleaned_skills_df["competences"]
-new_df["qualitesProfessionnelles"].iloc[:3] = cleaned_skills_df["qualitesProfessionnelles"]
-new_df["formations"].iloc[:3] = cleaned_skills_df["formations"]
+# new_df["competences"].iloc[:3] = cleaned_skills_df["competences"]
+# new_df["qualitesProfessionnelles"].iloc[:3] = cleaned_skills_df["qualitesProfessionnelles"]
+# new_df["formations"].iloc[:3] = cleaned_skills_df["formations"]
 
-print(new_df.iloc[:3])
+# print(new_df.iloc[:3])

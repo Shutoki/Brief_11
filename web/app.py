@@ -3,8 +3,7 @@ import pandas as pd
 import numpy as np
 import psycopg2
 import sqlalchemy
-# from utils import load_data
-import  plotly.express  as  px 
+import plotly.express  as  px 
 import plotly.figure_factory as ff
 import json
 import folium
@@ -13,7 +12,8 @@ import requests
 
 from streamlit_folium import folium_static
 
-from utils import load_data
+from utils import load_data, dept_region
+from path import data_geojson
 
 
 
@@ -25,18 +25,36 @@ conn = st.connection("postgresql", type="sql") # calls for secrets.toml file to 
 
 df = conn.query('SELECT * FROM france_travail;', ttl="10m") #fetch all data from table "france_travail" / ttl=10m for max cache time = 10 minutes
 
+data = pd.DataFrame(df)
+lowercase= lambda x: str(x).lower()
+data.rename(lowercase, axis='columns', inplace=True)
+print(data.columns)
+
+data["departement"] = data['lieutravail_libelle'].str.slice(0,3)
+data['departement'] = data['departement'].str.strip()
+data['region'] = data['departement'].astype(str).map(dept_region)
+
+data["latitude"] = pd.to_numeric(data["lieutravail_latitude"],errors = 'coerce')
+data["longitude"] = pd.to_numeric(data["lieutravail_longitude"],errors = 'coerce')
+valid_locations = data.dropna(subset=["latitude", "longitude"])
+print(data['romecode'].value_counts())
+
+st.title("Data : Marché du travail Tech")
+if st.button("Get data from API"):
+    response = requests.post("http://api:5000/api/offers", json={"begin_datetime": max_value})
+    print(response)
+    st.write(response.json())
 
 st.sidebar.title("Filtres")
 
 
-st.title("Data : Marché du travail Tech")
 
 # appel de la fonction load_data, affichage des données 
-data = load_data()
+# data = load_data()
+old_data = st.dataframe(data)
 
 # Affichage initial des données
 #st.dataframe(data)
-
 
 
  # Nom des colonnes
@@ -89,7 +107,7 @@ df = data[display_columns]
 #st.dataframe(data)
 ############## Répartitition géographique des offres
 
-regions = gpd.read_file("/home/isalog/Brief11/Brief_11/web/regions.geojson")
+regions = gpd.read_file(data_geojson)
 
 # # Afficher les premières lignes pour vérifier
 #st.write(regions.head())
@@ -106,7 +124,7 @@ codes_rome_couleurs = {
     'M1805': 'green',  # Couleur pour M1805
     'M1403': 'red'  # Couleur pour M1403
 }
-for idx, row in data.iterrows():
+for idx, row in valid_locations.iterrows():
     if row['romecode'] in codes_rome_couleurs:
         folium.CircleMarker(
             location=[row['latitude'], row['longitude']],
