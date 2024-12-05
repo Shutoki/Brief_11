@@ -1,10 +1,13 @@
-*.zone.identifier
+*.Zone.Identifier
 *.csv
 
 testing_api.ipynb
+test.ipynb
 api.py
-web/path.py
 france_travail_extract.ipynb
+web/path.py
+api/api.py
+psyenv/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
