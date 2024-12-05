@@ -1,4 +1,4 @@
-*.zone.identifier
+*.Zone.Identifier
 *.csv
 
 web/path.py
