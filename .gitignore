@@ -8,6 +8,7 @@ france_travail_extract.ipynb
 web/path.py
 api/api.py
 psyenv/
+ai_keys.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
