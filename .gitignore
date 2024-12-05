@@ -1,7 +1,9 @@
 *.zone.identifier
 *.csv
 
-path.py
+web/path.py
+api/api.py
+psyenv/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
