@@ -32,7 +32,7 @@ st.sidebar.title("Filtres")
 st.title("Data : Marché du travail Tech")
 
 # appel de la fonction load_data, affichage des données 
-data = load_data()
+data = df
 
 # Affichage initial des données
 #st.dataframe(data)
