@@ -8,7 +8,6 @@ import json
 from test import new_df
 from ai_keys import client
 
-
 load_dotenv()
 
 AZUR_ENDPOINT = os.getenv("AZUR_ENDPOINT")
