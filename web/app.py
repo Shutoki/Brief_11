@@ -26,6 +26,7 @@ conn = st.connection("postgresql", type="sql") # calls for secrets.toml file to 
 df = conn.query('SELECT * FROM france_travail;', ttl="10m") #fetch all data from table "france_travail" / ttl=10m for max cache time = 10 minutes
 
 data = pd.DataFrame(df)
+
 lowercase= lambda x: str(x).lower()
 data.rename(lowercase, axis='columns', inplace=True)
 print(data.columns)
@@ -40,6 +41,7 @@ valid_locations = data.dropna(subset=["latitude", "longitude"])
 print(data['romecode'].value_counts())
 
 st.title("Data : Marché du travail Tech")
+
 if st.button("Get data from API"):
     response = requests.post("http://api:5000/api/offers", json={"begin_datetime": max_value})
     print(response)
@@ -50,7 +52,6 @@ st.sidebar.title("Filtres")
 
 
 # appel de la fonction load_data, affichage des données 
-# data = load_data()
 old_data = st.dataframe(data)
 
 # Affichage initial des données

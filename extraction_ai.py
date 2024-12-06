@@ -18,6 +18,9 @@ df = pd.read_csv("postgres_data/france_travail_clean.csv")
 print(df.shape)
 
 
+
+
+
 deployment_name="gpt-35-turbo (version:0301)"
 
 
