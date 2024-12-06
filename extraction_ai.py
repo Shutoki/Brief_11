@@ -8,7 +8,6 @@ import json
 from test import new_df
 from ai_keys import client
 
-
 load_dotenv()
 
 AZUR_ENDPOINT = os.getenv("AZUR_ENDPOINT")
@@ -17,6 +16,9 @@ AZUR_KEY = os.getenv("AZUR_KEY")
 
 df = pd.read_csv("postgres_data/france_travail_clean.csv")
 print(df.shape)
+
+
+
 
 
 deployment_name="gpt-35-turbo (version:0301)"

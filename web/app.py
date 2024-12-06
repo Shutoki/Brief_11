@@ -50,7 +50,6 @@ st.sidebar.title("Filtres")
 
 
 # appel de la fonction load_data, affichage des données 
-# data = load_data()
 old_data = st.dataframe(data)
 
 # Affichage initial des données

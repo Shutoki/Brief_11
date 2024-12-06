@@ -10,6 +10,7 @@ api/api.py
 ai_keys.py
 
 psyenv/
+ai_keys.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
