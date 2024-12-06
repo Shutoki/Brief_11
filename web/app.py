@@ -26,10 +26,19 @@ conn = st.connection("postgresql", type="sql") # calls for secrets.toml file to 
 df = conn.query('SELECT * FROM france_travail;', ttl="10m") #fetch all data from table "france_travail" / ttl=10m for max cache time = 10 minutes
 
 data = pd.DataFrame(df)
+<<<<<<< HEAD
 
 lowercase= lambda x: str(x).lower()
 data.rename(lowercase, axis='columns', inplace=True)
+=======
+print("test data: ",data)
+
+def lowercase(x):
+    return str(x).lower()
+data.rename(lowercase(data), axis='columns', inplace=True)
+>>>>>>> isab5
 print(data.columns)
+
 
 data["departement"] = data['lieutravail_libelle'].str.slice(0,3)
 data['departement'] = data['departement'].str.strip()
@@ -41,11 +50,18 @@ valid_locations = data.dropna(subset=["latitude", "longitude"])
 print(data['romecode'].value_counts())
 
 st.title("Data : Marché du travail Tech")
+<<<<<<< HEAD
 
 if st.button("Get data from API"):
     response = requests.post("http://api:5000/api/offers", json={"begin_datetime": max_value})
     print(response)
     st.write(response.json())
+=======
+# #if st.button("Get data from API"):
+#  #   response = requests.post("http://api:5000/api/offers", json={"begin_datetime": max_value})
+#     print(response)
+#     st.write(response.json())
+>>>>>>> isab5
 
 st.sidebar.title("Filtres")
 
