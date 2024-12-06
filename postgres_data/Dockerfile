@@ -12,4 +12,4 @@ COPY . /app
 
 RUN pip3 install -r requirements.txt
 
-CMD ["python", "populate.py"]
+CMD ["sleep", "infinity"]

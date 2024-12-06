@@ -15,4 +15,4 @@ COPY . /app
 RUN pip3 install -r requirements.txt
 
 # Définir la commande pour lancer l'application
-CMD ["python", "app.py"]
+CMD ["sleep", "infinity"]
