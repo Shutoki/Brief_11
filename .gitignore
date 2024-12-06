@@ -6,6 +6,7 @@ test.ipynb
 api.py
 france_travail_extract.ipynb
 ai_keys.py
+llm_test.py
 
 web/path.py
 api/api.py

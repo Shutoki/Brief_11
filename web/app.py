@@ -31,6 +31,7 @@ lowercase= lambda x: str(x).lower()
 data.rename(lowercase, axis='columns', inplace=True)
 print(data.columns)
 
+
 data["departement"] = data['lieutravail_libelle'].str.slice(0,3)
 data['departement'] = data['departement'].str.strip()
 data['region'] = data['departement'].astype(str).map(dept_region)
@@ -42,10 +43,11 @@ print(data['romecode'].value_counts())
 
 st.title("Data : Marché du travail Tech")
 
-if st.button("Get data from API"):
-    response = requests.post("http://api:5000/api/offers", json={"begin_datetime": max_value})
-    print(response)
-    st.write(response.json())
+
+# #if st.button("Get data from API"):
+#  #   response = requests.post("http://api:5000/api/offers", json={"begin_datetime": max_value})
+#     print(response)
+#     st.write(response.json())
 
 st.sidebar.title("Filtres")
 
@@ -95,11 +97,9 @@ if 'alternance' in columns:
 
 # Sélection des colonnes à afficher
 st.sidebar.markdown("# Affichage")
-display_columns = st.sidebar.multiselect(
-    "Sélectionner les colonnes à afficher",
+display_columns = st.sidebar.multiselect("Sélectionner les colonnes à afficher",
     columns,
-    default=columns
-)
+    default=columns)
 
 # Sélection des colonnes
 df = data[display_columns]
