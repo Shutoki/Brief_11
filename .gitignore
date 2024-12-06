@@ -5,12 +5,13 @@ testing_api.ipynb
 test.ipynb
 api.py
 france_travail_extract.ipynb
-web/path.py
-api/api.py
 ai_keys.py
 
+web/path.py
+api/api.py
+
 psyenv/
-ai_keys.py
+postgres_data/postgres/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
