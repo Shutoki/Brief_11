@@ -37,7 +37,6 @@ def fetch_offers(start, end, delta, all_jobs):
         try: 
             search_on_big_data = client.search(params=params) 
             num_results = int(search_on_big_data["Content-Range"]["max_results"])
-            # print(f"Test Response: {search_on_big_data}")
             results = search_on_big_data['resultats']
         except AttributeError:
             print("No results. Continue...")
@@ -65,7 +64,8 @@ def insert_datas(all_jobs):
     for column in df.columns: 
         if df[column].apply(lambda x: isinstance(x, (dict, list))).any(): 
             df[column] = df[column].apply(lambda x: json.dumps(x))
-    # print(df.iloc[5])
+    print(df.iloc[5]['lieuTravail'])
+    print(df.shape)
 
     columns_in_table = ["id", "intitule", "description", "dateCreation", "dateActualisation", "lieuTravail_latitude", "lieuTravail_longitude", "lieuTravail_libelle", "romeCode", "typeContrat", "experienceExige", "alternance", "origineOffre_urlOrigine", "dureeTravailLibelleConverti", "competences", "qualitesProfessionnelles", "formations"] 
     for column in df.columns: 
@@ -101,16 +101,15 @@ def get_offers():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)  
-    # from datetime import datetime, timedelta # Définir les paramètres de test 
-    # data = {"begin_datetime": "2024-11-25T00:00:00"} 
-    # dt = datetime.fromisoformat(data['begin_datetime']) + timedelta(seconds=1) 
-    # all_results = [] 
-    # start_dt = dt 
-    # end_dt = datetime.today() 
-    # delta = timedelta(days=10) 
-    # fetch_offers(start_dt, end_dt, delta, all_results) 
-    # insert_datas(all_results) 
+    # app.run(host="0.0.0.0", port=5000, debug=True)  
+    from datetime import datetime, timedelta # Définir les paramètres de test 
+    data = {"begin_datetime": "2024-11-25T00:00:00"} 
+    dt = datetime.fromisoformat(data['begin_datetime']) + timedelta(seconds=1) 
+    all_results = [] 
+    start_dt = dt 
+    end_dt = datetime.today() 
+    delta = timedelta(days=10) 
+    fetch_offers(start_dt, end_dt, delta, all_results) 
     # print(all_results)     
 
 #     params.update({'minCreationDate' : dt_to_str_iso(end_dt), 'maxCreationDate': dt_to_str_iso(start_dt)})
