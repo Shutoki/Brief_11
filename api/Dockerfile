@@ -9,7 +9,7 @@ RUN apt-get -y update \
     && pip install psycopg2
 
 # Copier le fichier requirements.txt dans le répertoire de travail
-COPY . /app
+COPY . .
 
 # Installer les dépendances nécessaires
 RUN pip3 install -r requirements.txt

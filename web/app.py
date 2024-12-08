@@ -26,6 +26,7 @@ conn = st.connection("postgresql", type="sql") # calls for secrets.toml file to 
 df = conn.query('SELECT * FROM france_travail;', ttl="10m") #fetch all data from table "france_travail" / ttl=10m for max cache time = 10 minutes
 
 data = pd.DataFrame(df)
+print(data.columns)
 
 lowercase= lambda x: str(x).lower()
 data.rename(lowercase, axis='columns', inplace=True)
@@ -42,10 +43,13 @@ valid_locations = data.dropna(subset=["latitude", "longitude"])
 print(data['romecode'].value_counts())
 
 st.title("Data : Marché du travail Tech")
-# #if st.button("Get data from API"):
-#  #   response = requests.post("http://api:5000/api/offers", json={"begin_datetime": max_value})
-#     print(response)
-#     st.write(response.json())
+
+max_value = max(data['datecreation'])
+print(max_value)
+if st.button("Get data from API"):
+    response = requests.post("http://172.18.0.6:5000/api/offers", json={"begin_datetime": max_value}, timeout=100)
+    print(response)
+    st.write(response.json())
 
 st.sidebar.title("Filtres")
 
@@ -98,7 +102,7 @@ st.sidebar.markdown("# Affichage")
 display_columns = st.sidebar.multiselect(
     "Sélectionner les colonnes à afficher",
     columns,
-    default=columns
+    default="intitule"
 )
 
 # Sélection des colonnes
@@ -159,7 +163,7 @@ if 'region' in data.columns and 'romecode' in data.columns:
     selected_romecodes = st.multiselect('Sélectionnez les codes rome à afficher', romecodes, default=romecodes)
 
     # Filtrer les données selon la sélection
-    df_filtered = df_count[df_count['romecode'].isin(selected_romecodes)]
+    df_filtered = df_count[df_count['romecode'].isin(romecodes)]
 
     # Créer un seul treemap pour les romecodes sélectionnés
     fig = px.treemap(
